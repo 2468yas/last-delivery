@@ -36,7 +36,27 @@ If the pizza arrives intact, June's house gets brighter, she leaves a warm note,
 
 ## Docs
 
-- [Game Design Document (PDF)](docs/Last_Delivery_GDD.pdf)
+- [Game Design Document (PDF)](docs/Last_Delivery_GDD.pdf) and [Word version](docs/Last_Delivery_GDD.docx)
+- [Core Game Loop (combined)](docs/Core_Game_Loop_Combined.docx)
+- [Playtest Round 1: test plan and survey](docs/Playtest_Round1.md)
+
+### Where the idea came from
+
+Last Delivery combines two earlier concepts:
+
+- **Bellrum (Shubh):** the pizza delivery story, the memory system and the town of Bellrum. [Art Bible](docs/concepts/shubh-bellrum/Game_Art_Bible_Bellrum.pdf), [World Atlas](docs/concepts/shubh-bellrum/World_Building_Atlas_Bellrum.pdf), [Core Game Loop](docs/concepts/shubh-bellrum/Core_Game_Loop_Bellrum.docx)
+- **Neon Rain City (Yasin):** the top-down pixel art style, the glowing neon rain, upgrades and randomized runs. [Art Bible](docs/concepts/yasin-neon-rain-city/Game_Art_Bible_Neon_Rain_City.pdf), [World Atlas](docs/concepts/yasin-neon-rain-city/World_Building_Atlas_Neon_Rain_City.pdf), [Core Game Loop](docs/concepts/yasin-neon-rain-city/Core_Game_Loop_Neon_Rain_City.pdf)
+
+## Art
+
+| | |
+|---|---|
+| ![Monday street](art/mockups/monday_street.png) | ![Friday neon street](art/mockups/friday_neon_street.png) |
+| Monday: sunny and calm | Friday: glowing neon rain |
+| ![Bellrum map](art/bellrum/bellrum_map.png) | ![Bellrum timeline](art/bellrum/bellrum_timeline.png) |
+| Map of Bellrum | Her last five days |
+
+More in the [art folder](art): palettes, the HUD reference, the core loop diagram, and the Neon Rain City concept art.
 
 ## What's next
 
