@@ -19,14 +19,18 @@ public static class LastDeliverySetup
         Sprite square = MakeSquareSprite();
 
         MakeScene(SceneNames.Start, typeof(StartScreen), null);
-        MakeScene(SceneNames.Game, typeof(PlayerTestShift), square);
+        MakeScene(SceneNames.PlayerTest, typeof(PlayerTestShift), square);
         MakeScene(SceneNames.Summary, typeof(ShiftSummary), null);
         MakeScene(SceneNames.Shop, typeof(UpgradeShop), null);
 
         // start screen first in the build order
         var list = new List<EditorBuildSettingsScene>();
-        foreach (string n in new[] { SceneNames.Start, SceneNames.Game, SceneNames.Summary, SceneNames.Shop })
+        foreach (string n in new[] { SceneNames.Start, SceneNames.PlayerTest, SceneNames.Summary, SceneNames.Shop })
             list.Add(new EditorBuildSettingsScene(SceneFolder + "/" + n + ".unity", true));
+
+        // keep Shubh's TestStreet in the build if it exists (the flow loads it as SceneNames.Game)
+        string street = SceneFolder + "/" + SceneNames.Game + ".unity";
+        if (File.Exists(street)) list.Add(new EditorBuildSettingsScene(street, true));
         EditorBuildSettings.scenes = list.ToArray();
 
         EditorSceneManager.OpenScene(SceneFolder + "/" + SceneNames.Start + ".unity");
