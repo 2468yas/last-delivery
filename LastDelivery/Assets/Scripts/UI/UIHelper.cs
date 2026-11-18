@@ -35,7 +35,7 @@ public static class UIHelper
             r.offsetMin = Vector2.zero; r.offsetMax = Vector2.zero;
         }
 
-        if (Object.FindFirstObjectByType<EventSystem>() == null)
+        if (Object.FindAnyObjectByType<EventSystem>() == null)
             new GameObject("EventSystem", typeof(EventSystem), typeof(InputSystemUIInputModule));
 
         return canvas;
