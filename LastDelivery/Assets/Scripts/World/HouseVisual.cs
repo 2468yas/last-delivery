@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 // Put this on each house. It shows the vivid / normal / faded version
@@ -5,15 +6,16 @@ using UnityEngine;
 [RequireComponent(typeof(SpriteRenderer))]
 public class HouseVisual : MonoBehaviour
 {
-    [Header("Save key (must be unique per house)")]
+    [Header("Save key (must be unique per house, and match StoryData)")]
     public string houseId = "june_14_elm";
 
-    [Header("Shown in the delivery prompt")]
-    public string displayName = "June - 14 Elm St";
+    [Header("Shown in game")]
+    public string displayName = "14 Elm St";     // address label above the house
+    public string residentName = "June";         // who signs the note
 
-    [Header("Memory fragments this house can give")]
-    public string goodMemory = "Sunday dinners at June's";
-    public string badMemory = "A door that stayed closed";
+    [Header("Legacy (old test street, not used by ShiftManager)")]
+    public string goodMemory = "";
+    public string badMemory = "";
 
     [Header("Art (leave empty to use colors on a placeholder square)")]
     public Sprite vividSprite;
@@ -24,9 +26,25 @@ public class HouseVisual : MonoBehaviour
     [Header("Where the player stands to deliver (relative to the house)")]
     public Vector2 doorOffset = new Vector2(0f, -1.6f);
 
+    // every house in the open scene (so other scripts don't need to search for them)
+    public static readonly List<HouseVisual> All = new List<HouseVisual>();
+
     SpriteRenderer sr;
 
+    void OnEnable() { if (!All.Contains(this)) All.Add(this); }
+    void OnDisable() { All.Remove(this); }
+
     public Vector2 DoorPosition => (Vector2)transform.position + doorOffset;
+
+    // top of the house, for the address label
+    public Vector3 LabelPosition
+    {
+        get
+        {
+            if (sr == null) sr = GetComponent<SpriteRenderer>();
+            return new Vector3(transform.position.x, sr.bounds.max.y + 0.35f, 0f);
+        }
+    }
 
     void Start()
     {

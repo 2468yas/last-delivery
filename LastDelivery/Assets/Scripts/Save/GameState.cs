@@ -118,6 +118,15 @@ public class GameState : MonoBehaviour
 
     public bool SaveToDisk() { return SaveManager.Save(data); }
 
+    // the memory fragment earned at the end of a shift (shown on the summary screen)
+    public void AddMemoryFragment(string fragment)
+    {
+        if (string.IsNullOrEmpty(fragment)) return;
+        if (!data.memoryFragments.Contains(fragment)) data.memoryFragments.Add(fragment);
+        shiftFragment = fragment;
+        Changed?.Invoke();
+    }
+
     HouseMemory FindHouse(string houseId)
     {
         return data.houseMemories.Find(h => h.houseId == houseId);
