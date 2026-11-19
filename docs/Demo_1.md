@@ -21,7 +21,8 @@ Three shifts plus summaries and the shop run well over 7 minutes. The only non-i
 ## Controls
 | Action | Keyboard | Controller |
 |---|---|---|
-| Move | WASD / arrows | Left stick (Yasin) |
+| Move | WASD / arrows | Left stick / d-pad |
+| Steady the stack (walk slower) | SHIFT | LB / RB / triggers |
 | Interact / pick up / deliver / continue | SPACE, ENTER or E | A / Cross |
 | Debug: crush the pizza | C | Y / Triangle |
 | Open the save folder | O | |
@@ -30,7 +31,7 @@ Three shifts plus summaries and the shop run well over 7 minutes. The only non-i
 - **Graphics:** pixel-art houses with 3 versions each (vivid / normal / faded), each with a visible clue prop; Corner Slice, player, trees, lampposts and Willow Pond.
 - **Music and sound:** calm Monday theme, uneasy theme from Tuesday on, and sounds for pick-up, knocking, good and bad deliveries, wrong house, notes, clock-out and crashes.
 - **Story in the game:** intro cards, resident notes that get stranger each day, memory fragments, and the order to her own address.
-- **Controller:** interact works on a controller; movement and balancing are Yasin's part.
+- **Controller:** everything works on a controller: movement, steadying, interact, and menu buttons (d-pad + A). Rumble on car hits and crashes.
 - **Doesn't need a guide:** every step has an on-screen prompt.
 
 ## For Other Half: hooking the balancing in
@@ -40,3 +41,13 @@ Three shifts plus summaries and the shop run well over 7 minutes. The only non-i
 - Events: `PizzaStack.PickedUp` (reset sway), `PizzaStack.WasCrushed`, `PizzaStack.Delivered`.
 - Hazard difficulty for the day: `StoryData.GetDay(GameState.Get().data.currentDay).hazardLevel` (1 = calm ... 5 = storm).
 - Sprites ready to use: `Assets/Art/Bellrum/car.png`, `pizza_box.png`. Sounds: `AudioManager.Play("wobble")`, `AudioManager.Play("crash")`.
+
+## Player and hazards (Yasin's half)
+No scene or prefab edits needed. `PlayerMovement` adds `StackBalance` to the player and, on the street, creates `HazardSpawner`.
+- **Movement with momentum:** she speeds up and slows down instead of snapping. Slower and heavier while carrying.
+- **Sway meter:** the bar above her head. Speeding up, stopping and turning make the stack lean, and moving the way it leans pulls it back. Hold SHIFT / LB to steady it (half speed). Past the red the stack falls: `PizzaStack.Crush()`, boxes fly off, she carries one dented box the rest of the way.
+- **Cars:** two lanes, more and faster each day (`hazardLevel`). A hit knocks her back and usually topples the stack. Passing cars shove the stack a little; driving past a puddle she's near splashes her.
+- **Puddles:** 3 on Monday, +2 each day, never in front of a door. She slides (less grip) and the stack jolts.
+- **Wind:** from hazardLevel 3 (Wednesday), random gusts.
+- **Upgrades hooked in:** Better Bag = less sway, Grippy Shoes = more grip in puddles, Box Holder = stronger hands.
+- Tuning numbers are public fields on `StackBalance`, `PlayerMovement` and `HazardSpawner` (tweak in the Inspector while playing).
