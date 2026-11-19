@@ -33,7 +33,7 @@ Three shifts plus summaries and the shop run well over 7 minutes. The only non-i
 - **Controller:** interact works on a controller; movement and balancing are Yasin's part.
 - **Doesn't need a guide:** every step has an on-screen prompt.
 
-## For Yasin: hooking the balancing in
+## For Other Half: hooking the balancing in
 - The player is now a prefab: `Assets/Prefabs/Player.prefab`. Add your balancing / stack scripts to the prefab, not the scene, so we don't both edit `TestStreet.unity`.
 - `PizzaStack.HasPizza` is true while she is carrying an order (show the boxes, run the sway).
 - Call `PizzaStack.Crush()` when the stack tips over. It plays the crash sound and the delivery counts as crushed.
